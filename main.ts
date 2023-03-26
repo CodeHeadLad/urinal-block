@@ -41,9 +41,9 @@ basic.forever(function () {
         pins.digitalWritePin(DigitalPin.P3, 1)
         basic.showIcon(IconNames.No)
         basic.pause(5000)
+        Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
     } else {
         pins.digitalWritePin(DigitalPin.P3, 0)
-        Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
     }
     basic.pause(200)
 })
