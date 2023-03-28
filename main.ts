@@ -1,11 +1,20 @@
-let Bottom_Reservoir_MP = 0
-let Top_Reservoir_MP = 0
 input.onButtonPressed(Button.A, function () {
-    music.setVolume(127)
+    music.setVolume(255)
+    basic.showNumber(pins.analogReadPin(AnalogPin.P1))
+    pins.digitalWritePin(DigitalPin.P10, 1)
 })
 input.onButtonPressed(Button.B, function () {
+    Kitronik_Robotics_Board.allOff()
     music.setVolume(0)
+    pins.digitalWritePin(DigitalPin.P10, 0)
 })
+let Top_Reservoir_MP = 0
+let Bottom_Reservoir_MP = 0
+pins.digitalWritePin(DigitalPin.P15, 0)
+pins.digitalWritePin(DigitalPin.P14, 0)
+pins.digitalWritePin(DigitalPin.P13, 0)
+pins.digitalWritePin(DigitalPin.P12, 0)
+pins.digitalWritePin(DigitalPin.P10, 0)
 basic.forever(function () {
     Bottom_Reservoir_MP = pins.analogReadPin(AnalogPin.P0)
     Top_Reservoir_MP = pins.analogReadPin(AnalogPin.P1)
@@ -34,16 +43,16 @@ basic.forever(function () {
         pins.digitalWritePin(DigitalPin.P2, 0)
         Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
     }
-    if (Top_Reservoir_MP > 850) {
+    if (Top_Reservoir_MP > 700) {
         music.playTone(262, music.beat(BeatFraction.Whole))
         music.rest(music.beat(BeatFraction.Whole))
         music.playTone(262, music.beat(BeatFraction.Whole))
-        pins.digitalWritePin(DigitalPin.P3, 1)
+        pins.digitalWritePin(DigitalPin.P10, 0)
         basic.showIcon(IconNames.No)
         basic.pause(5000)
         Kitronik_Robotics_Board.motorOff(Kitronik_Robotics_Board.Motors.Motor1)
     } else {
-        pins.digitalWritePin(DigitalPin.P3, 0)
+        pins.digitalWritePin(DigitalPin.P10, 1)
     }
     basic.pause(200)
 })
